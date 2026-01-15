@@ -9,16 +9,18 @@
 ```text
 prototype/
 ├── src/
+│   ├── assets/
+│   │   └── images/     # 🖼 圖片資源：本地化圖片，確保跨域截圖功能正常
 │   ├── css/
-│   │   └── style.css       # 🎨 樣式層：所有視覺樣式定義
+│   │   └── style.css   # 🎨 樣式層：所有視覺樣式定義
 │   ├── js/
-│   │   ├── app.js          # 🧠 邏輯層：核心應用程式邏輯、狀態管理
-│   │   ├── data.js         # 💾 資料層：題庫與結果資料 (Static Data)
-│   │   └── utils.js        # 🛠 工具層：共用函式 (複製、下載、Toast)
-├── docs/                   # 📚 文件：架構與開發說明
-├── index.html              # 🖥 視圖層：主要入口與 DOM 結構
-├── package.json            # ⚙️ 設定：專案資訊與開發腳本
-└── README.md               # 📖 說明：專案首頁
+│   │   ├── app.js      # 🧠 邏輯層：核心應用程式邏輯、狀態管理
+│   │   ├── data.js     # 💾 資料層：題庫與結果資料 (Static Data)
+│   │   └── utils.js    # 🛠 工具層：共用函式 (複製、下載、Toast)
+├── docs/               # 📚 文件：架構、資安與開發說明
+├── index.html          # 🖥 視圖層：主要入口與 DOM 結構
+├── package.json        # ⚙️ 設定：專案資訊與開發腳本
+└── README.md           # 📖 說明：專案首頁
 ```
 
 ## 🛠 技術堆疊 (Tech Stack)
@@ -38,21 +40,22 @@ prototype/
 ## 🔄 資料流與邏輯
 
 1.  **初始化**: `app.js` 載入後，隱藏 Landing Page，顯示 Quiz Page。
-2.  **測驗過程**: 
+2.  **圖片載入**: 
+    - 圖片資源皆指向 `src/assets/images/`。
+    - 使用相對路徑，支援子網域 (Sub-domain) 部署，無需修改程式碼。
+3.  **測驗過程**: 
     - 使用 `currentStep` 追蹤進度。
-    - 使用 `userAnswers` 陣列儲存使用者選擇。
     - 透過 DOM 操作動態更新題目與進度條。
-3.  **結果計算**: 
-    - 根據使用者選擇計算四大元素 (Fire, Earth, Wind, Water) 的得分。
-    - 取最高分者為主要屬性，並結合最後一題的選擇，映射至 `data.js` 中的 8 種結果。
-4.  **結果展示**: 
-    - 動態渲染結果頁面的標題、描述、推薦產品與圖片。
-    - 提供「截圖下載」與「複製連結」功能。
+4.  **結果計算**: 
+    - 根據四大元素 (Fire, Earth, Wind, Water) 得分計算結果。
+5.  **結果展示**: 
+    - 動態渲染結果頁面。
+    - **截圖功能**: 由於圖片同源 (Same-Origin)，`html2canvas` 可直接讀取並產生高品質圖片，無 CORS 錯誤。
 
-## ⚠️ 注意事項
-- **ES Modules**: 由於使用了 `<script type="module">`，本專案必須透過 HTTP Server (如 `http-server` 或 VS Code Live Server) 運行，無法直接透過檔案路徑 (`file://`) 開啟，否則會遇到 CORS 錯誤。
-- **圖片跨域**: `html2canvas` 截圖功能受限於 CORS 政策。專案中的圖片需確保伺服器支援 `Access-Control-Allow-Origin: *`，或使用同源圖片。
+## ⚠️ 部署須知
+- **HTTP Server**: 必須透過 Web Server 運行 (如 Nginx, Apache, Vercel)，不可直接開啟檔案。
+- **子網域**: 支援任意層級的 Sub-domain (如 `fortune.spidercard.com`)，上傳即可使用。
 
 ## 🚀 未來擴充建議
-- 若需增加題目，請直接修改 `src/js/data.js`。
+- 若需增加題目，請直接修改 `src/js/data.js` 並將新圖片放入 `src/assets/images/`。
 - 若需更換視覺風格，請修改 `src/css/style.css` 中的 CSS 變數。

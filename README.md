@@ -4,14 +4,12 @@
 
 這是一個互動式的心理測驗 Web App，旨在推廣 SPIDERCARD 品牌形象。使用者透過回答 8 個情境問題，分析出個人的年度關鍵字，並獲得專屬的開運小物推薦。
 
-![專案截圖](https://via.placeholder.com/800x400?text=SPIDERCARD+2026+Demo)
-
 ## ✨ 特色功能
 
 - **沉浸式測驗體驗**: 流暢的問答介面與過場動畫。
 - **精美結果生成**: 自動產生包含個人關鍵字與解籤的精美圖片。
 - **一鍵分享**: 支援將結果下載為圖片，或複製連結分享給好友。
-- **響應式設計**: 專為行動裝置優化，同時兼容桌面瀏覽器。
+- **完全本地化資源**: 圖片與邏輯皆內建，無需依賴外部 API，部署簡單且穩定。
 
 ## 🚀 快速開始 (Quick Start)
 
@@ -41,22 +39,24 @@ npx http-server .
 
 ## 🛠 開發指南
 
-請參閱 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) 以了解詳細的程式碼架構與檔案職責。
+詳細架構請參閱 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)，資安報告請見 [docs/SECURITY_AUDIT.md](docs/SECURITY_AUDIT.md)。
 
 - **修改題目**: 編輯 `src/js/data.js`
+- **修改圖片**: 替換 `src/assets/images/` 中的檔案
 - **修改樣式**: 編輯 `src/css/style.css`
-- **修改邏輯**: 編輯 `src/js/app.js`
 
 ## 📦 專案結構
 
 ```
 prototype/
 ├── index.html          # 入口檔案
-├── src/                # 原始碼
+├── src/
+│   ├── assets/         # 靜態資源 (圖片)
 │   ├── css/            # 樣式表
 │   └── js/             # 邏輯腳本 (ES Modules)
-└── docs/               # 開發文件
+├── docs/               # 開發與資安文件
+└── package.json        # 專案資訊
 ```
 
 ## 📄 版權說明
-本專案為 SPIDERCARD 內部專案。圖片素材版權歸原作者所有。
+本專案為 SPIDERCARD 內部專案。
