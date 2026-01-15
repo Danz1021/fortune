@@ -243,7 +243,8 @@
     </div>
 
     <!-- Hidden Export Template (9:16 Aspect Ratio) -->
-    <div id="export-template" class="fixed top-0 left-[-9999px] w-[1080px] h-[1920px] bg-[#b93c37] flex flex-col items-center pt-24 pb-20 px-16 text-center font-serif text-white overflow-hidden" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23F8CB2B\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');">
+    <!-- FIX: Moved from left-[-9999px] to left-0 -z-50 to avoid mobile GPU texture size limits -->
+    <div id="export-template" class="fixed top-0 left-0 -z-50 w-[1080px] h-[1920px] bg-[#b93c37] flex flex-col items-center pt-24 pb-20 px-16 text-center font-serif text-white overflow-hidden pointer-events-none invisible" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23F8CB2B\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');">
         
         <!-- Header -->
         <p class="text-[#F8CB2B] text-4xl font-bold tracking-widest mb-2 font-sans">你的</p>
