@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <!-- 加入這行以解決 Pinterest 圖片無法顯示的問題 -->
+    <meta name="referrer" content="no-referrer">
+    <title>2026 你的開運關鍵字 - SPIDERCARD</title>
+    <!-- Tailwind CSS -->
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <!-- Google Fonts -->
+    <link href="[https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap](https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap)" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
+    <!-- html2canvas for Screenshot -->
+    <script src="[https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js](https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js)"></script>
+
+    <style>
+        :root {
+            --red-brand: #E44C46;
+            --gold-brand: #F8CB2B;
+            --red-dark: #b93c37; 
+            --gold-dark: #d9aa18; 
+            --paper-bg: #fffbeb;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #2a0a08;
+            color: #fffbeb;
+            overflow-x: hidden;
+        }
+
+        .font-serif {
+            font-family: 'Noto Serif TC', serif;
+        }
+        
+        .font-sans {
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        /* Background Pattern */
+        .bg-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='[http://www.w3.org/2000/svg'%3E%3Cg](http://www.w3.org/2000/svg'%3E%3Cg) fill='none' fill-rule='evenodd'%3E%3Cg fill='%23F8CB2B' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Mobile Container */
+        .app-container {
+            max-width: 480px;
+            margin: 0 auto;
+            height: 100dvh; /* Fix height to viewport height */
+            background: linear-gradient(180deg, #ee261f 0%, #b93c37 100%);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            overflow: hidden; 
+        }
+
+        .gold-text-gradient {
+            background: linear-gradient(to right, #F8CB2B, #fcd34d, #F8CB2B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Option Card */
+        .option-card {
+            background: rgba(255, 255, 255, 0.95);
+            color: #5c1815;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .option-card:active {
+            transform: scale(0.98);
+        }
+        .option-card.selected {
+            background: #fffbeb;
+            border-color: var(--gold-brand);
+            box-shadow: 0 0 15px rgba(248, 203, 43, 0.6);
+        }
+        .option-card.selected::after {
+            content: '★';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold-brand);
+            font-size: 1.5rem;
+        }
+
+        /* Button Styling */
+        .btn-gold {
+            background: linear-gradient(to bottom, #F8CB2B, #eab308);
+            color: #5c1815;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.5);
+            border: 1px solid #b45309;
+            transition: all 0.2s;
+        }
+        .btn-gold:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        .btn-gold:disabled {
+            background: #9ca3af;
+            color: #4b5563;
+            box-shadow: none;
+            border: 1px solid #6b7280;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fffbeb;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.2s;
+        }
+        .btn-secondary:active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Result Paper Texture */
+        .fortune-paper {
+            background-color: #fffbeb;
+            color: #5c1815;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Animations */
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .pulse-glow {
+            animation: pulseGlow 2s infinite;
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(248, 203, 43, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(248, 203, 43, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(248, 203, 43, 0); }
+        }
+        
+        .scroll-hidden::-webkit-scrollbar { display: none; }
+
+        .writing-vertical {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="bg-stone-900">
+
+    <div class="app-container bg-pattern font-sans">
+        
+        <!-- Header / Nav -->
+        <div class="h-16 flex items-center justify-center sticky top-0 z-50 bg-[#E44C46]/95 backdrop-blur-sm border-b border-white/10 shadow-md shrink-0">
+            <!-- Back Button -->
+            <button id="back-btn" onclick="prevQuestion()" class="absolute left-4 w-10 h-10 flex items-center justify-center text-[#F8CB2B] hover:text-white transition-colors opacity-0 pointer-events-none">
+                <i class="fa-solid fa-chevron-left text-lg"></i>
+            </button>
+            
+            <div class="text-sm tracking-[0.2em] text-[#F8CB2B] font-bold uppercase">SPIDERCARD 2026</div>
+        </div>
+
+        <!-- PAGE 1: Landing Page -->
+        <div id="landing-page" class="flex-1 flex flex-col items-center justify-center p-8 text-center fade-in relative overflow-y-auto scroll-hidden">
+            
+            <!-- Decorative Elements -->
+            <div class="absolute top-10 left-0 w-full flex justify-between px-4 opacity-30 pointer-events-none">
+                <i class="fa-solid fa-cloud text-6xl text-[#F8CB2B]"></i>
+                <i class="fa-solid fa-cloud text-6xl text-[#F8CB2B] transform scale-x-[-1]"></i>
+            </div>
+
+            <!-- Main Visual: Giant Fortune Stick -->
+            <div class="mb-10 mt-12 relative z-10 animate-float">
+                <!-- The Stick Body -->
+                <div class="w-24 h-64 mx-auto bg-[#fffbeb] rounded-lg shadow-[0_0_50px_rgba(248,203,43,0.4)] flex flex-col items-center justify-center py-6 relative border border-[#E44C46]/20 overflow-hidden">
+                    <!-- Paper Texture Overlay -->
+                    <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)\'%3E%3Cg fill=\'%23000\' fill-rule=\'evenodd\'%3E%3Cpath d=\'M0 40L40 0H20L0 20M40 40V20L20 40\'/%3E%3C/g%3E%3C/svg%3E')]"></div>
+                    <!-- Top Red Mark -->
+                    <div class="absolute top-0 w-full h-4 bg-[#E44C46]"></div>
+                    <!-- Vertical Title -->
+                    <div class="relative z-10 h-full flex flex-col items-center justify-center">
+                        <div class="writing-vertical text-5xl font-serif font-black text-[#2c2c2c] tracking-[0.4em] leading-none border-x-2 border-[#2c2c2c] py-4 px-3">
+                            開運
+                        </div>
+                    </div>
+                    <!-- Bottom Decor -->
+                    <div class="absolute bottom-4 text-[#E44C46] text-sm font-serif font-bold pt-2 border-t border-[#E44C46]/30 w-12 text-center">
+                        上吉
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Title -->
+            <div class="mb-6 relative z-10">
+                <h1 class="text-center drop-shadow-md">
+                    <span class="block text-2xl font-sans font-bold text-white mb-2 tracking-widest">測出你的</span>
+                    <span class="block text-4xl font-sans font-black gold-text-gradient tracking-[0.1em]">2026開運關鍵字</span>
+                </h1>
+            </div>
+            
+            <!-- Description -->
+            <div class="w-full max-w-[280px] border-t border-b border-white/20 py-5 mb-10">
+                <p class="text-white/90 text-sm leading-loose font-sans font-light tracking-wide text-center">
+                    歲次丙午，躍馬之年。<br>
+                    你的靈魂頻率決定今年的開運秘訣。
+                </p>
+            </div>
+
+            <!-- Button -->
+            <button onclick="startQuiz()" class="w-full max-w-xs btn-gold rounded-full py-4 text-lg font-bold tracking-widest flex items-center justify-center gap-2 group shadow-[0_0_25px_rgba(248,203,43,0.3)] shrink-0">
+                <span>開運拿字</span> <i class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform"></i>
+            </button>
+            
+            <!-- Footer Text -->
+            <p class="mt-6 text-xs text-[#F8CB2B]/70 font-sans pb-8">此測驗將為您匹配 SPIDERCARD 開運神物</p>
+        </div>
+
+        <!-- PAGE 2: Quiz Page -->
+        <div id="quiz-page" class="hidden flex-1 flex flex-col fade-in relative h-full overflow-hidden">
+            
+            <!-- Scrollable Content Area -->
+            <div id="quiz-content" class="flex-1 overflow-y-auto scroll-hidden w-full flex flex-col items-center">
+                
+                <!-- Question Visual (Reduced Width using padding) -->
+                <div class="w-full px-12 relative shrink-0">
+                    <img id="q-img" src="" class="w-full h-auto object-cover" alt="Question Image">
+                </div>
+
+                <!-- Text & Options Wrapper with Padding -->
+                <div class="w-full px-6 pt-6 pb-6 flex flex-col items-center">
+                    <!-- Plain Text Progress -->
+                    <div class="text-[#F8CB2B] font-bold tracking-widest text-sm mb-2 font-serif text-center w-full">
+                        問題 <span id="q-number">1</span> / 8
+                    </div>
+
+                    <!-- Question Text -->
+                    <h2 id="q-text" class="text-xl font-bold text-white mb-8 leading-normal font-sans text-center w-full">
+                        題目載入中...
+                    </h2>
+
+                    <!-- Options -->
+                    <div class="space-y-4 w-full">
+                        <button id="opt-a" onclick="selectOption('A')" class="option-card w-full text-left p-5 rounded-xl flex items-start group">
+                            <div class="w-6 h-6 rounded-full border-2 border-[#E44C46] flex items-center justify-center text-xs font-bold mr-3 mt-0.5 shrink-0 bg-red-50 text-[#E44C46]">A</div>
+                            <span id="opt-a-text" class="text-sm font-medium leading-relaxed">選項 A</span>
+                        </button>
+
+                        <button id="opt-b" onclick="selectOption('B')" class="option-card w-full text-left p-5 rounded-xl flex items-start group">
+                            <div class="w-6 h-6 rounded-full border-2 border-[#E44C46] flex items-center justify-center text-xs font-bold mr-3 mt-0.5 shrink-0 bg-red-50 text-[#E44C46]">B</div>
+                            <span id="opt-b-text" class="text-sm font-medium leading-relaxed">選項 B</span>
+                        </button>
+
+                        <button id="opt-c" onclick="selectOption('C')" class="option-card w-full text-left p-5 rounded-xl flex items-start group">
+                            <div class="w-6 h-6 rounded-full border-2 border-[#E44C46] flex items-center justify-center text-xs font-bold mr-3 mt-0.5 shrink-0 bg-red-50 text-[#E44C46]">C</div>
+                            <span id="opt-c-text" class="text-sm font-medium leading-relaxed">選項 C</span>
+                        </button>
+
+                        <button id="opt-d" onclick="selectOption('D')" class="option-card w-full text-left p-5 rounded-xl flex items-start group">
+                            <div class="w-6 h-6 rounded-full border-2 border-[#E44C46] flex items-center justify-center text-xs font-bold mr-3 mt-0.5 shrink-0 bg-red-50 text-[#E44C46]">D</div>
+                            <span id="opt-d-text" class="text-sm font-medium leading-relaxed">選項 D</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Spacer for bottom button -->
+                <div class="w-full h-32 shrink-0"></div>
+            </div>
+
+            <!-- Bottom Action - Static Block -->
+            <div id="action-bar" class="w-full p-6 pb-8 bg-gradient-to-t from-[#2a0a08] via-[#2a0a08] to-transparent shrink-0 z-50 absolute bottom-0 left-0 hidden">
+                <button id="next-btn" onclick="nextQuestion()" class="hidden w-full btn-gold rounded-xl py-4 font-bold text-lg shadow-lg flex items-center justify-center gap-2">
+                    <span>繼續前進</span> <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                <button id="finish-btn" onclick="showResult()" class="hidden w-full btn-gold rounded-xl py-4 font-bold text-lg shadow-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-lock-open"></i> <span>解鎖關鍵字</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- PAGE 3: Result Page -->
+        <div id="result-page" class="hidden flex-1 flex flex-col overflow-y-auto scroll-hidden relative bg-[#E44C46]">
+            <!-- Result Header -->
+            <div class="flex-shrink-0 pt-12 pb-4 flex flex-col items-center relative z-10 animate-float bg-[#E44C46]">
+                
+                <!-- Tag -->
+                <div class="inline-block px-4 py-1.5 rounded-full bg-[#991b1b] text-[#F8CB2B] text-xs font-serif font-bold tracking-widest mb-6 shadow-md border border-[#F8CB2B]">
+                    2026 關鍵字
+                </div>
+
+                <!-- The Result Stick -->
+                <div class="w-24 h-auto py-6 mx-auto bg-[#fffbeb] rounded-lg shadow-[0_0_50px_rgba(248,203,43,0.4)] flex flex-col items-center justify-center relative border border-[#E44C46]/20 overflow-hidden">
+                    <!-- Texture -->
+                    <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)\'%3E%3Cg fill=\'%23000\' fill-rule=\'evenodd\'%3E%3Cpath d=\'M0 40L40 0H20L0 20M40 40V20L20 40\'/%3E%3C/g%3E%3C/svg%3E')]"></div>
+                    
+                    <!-- Top Mark -->
+                    <div class="absolute top-0 w-full h-4 bg-[#E44C46]"></div>
+                    
+                    <!-- Result Title (Injected JS) -->
+                    <div id="result-title" class="relative z-10 writing-vertical text-5xl font-serif font-black text-[#2c2c2c] tracking-[0.4em] leading-none border-x-2 border-[#2c2c2c] py-4 px-3 flex items-center justify-center"></div>
+                </div>
+            </div>
+
+            <!-- Fortune Paper Content -->
+            <div class="px-6 pb-20 mt-4 relative z-10">
+                
+                <!-- 籤詩解說 -->
+                <div class="fortune-paper rounded-3xl p-8 mb-8 relative shadow-2xl h-auto">
+                    <!-- Updated Text Here -->
+                    <div class="text-[#E44C46] font-serif font-bold text-lg mb-4 flex items-center border-b-2 border-[#E44C46]/20 pb-2">
+                        <i class="fa-solid fa-scroll mr-2"></i> 關鍵字解籤
+                    </div>
+                    <div id="result-desc" class="text-[#5c1815] text-base leading-loose font-medium text-justify font-serif"></div>
+                </div>
+
+                <!-- Lucky Item / Product -->
+                <div class="bg-[#b93c37] rounded-xl p-6 border border-[#F8CB2B]/30 shadow-xl mb-8">
+                    <h3 class="text-[#F8CB2B] font-sans font-bold text-sm tracking-widest mb-4 text-center uppercase">
+                        推薦您的 2026 開運小物
+                    </h3>
+                    
+                    <div class="bg-white rounded-lg p-1 mb-4 shadow-lg rotate-1 transform hover:rotate-0 transition-transform duration-500">
+                        <!-- 加入 referrerpolicy 屬性，移除 crossOrigin 以確保顯示 -->
+                        <img id="product-img" src="" class="w-full aspect-square object-cover rounded" referrerpolicy="no-referrer">
+                    </div>
+
+                    <h4 id="product-name" class="text-xl text-white font-bold text-center mb-2"></h4>
+                    
+                    <p id="product-copy" class="text-red-100 text-base text-center mb-6 font-light leading-relaxed"></p>
+
+                    <!-- Buy Button -->
+                    <a id="product-link" href="#" target="_blank" class="block w-full bg-white text-[#E44C46] rounded-lg py-5 text-2xl text-center font-bold shadow-lg hover:bg-gray-100 transition-all tracking-normal border border-white/50">
+                        立即擁有開運小物
+                    </a>
+                </div>
+
+                <!-- SPIDERCARD Intro -->
+                <div class="text-center mb-12 border-t border-white/30 pt-10">
+                    <p class="text-xl text-[#F8CB2B] uppercase tracking-widest mb-4 font-bold">About SPIDERCARD</p>
+                    <p class="text-white text-sm leading-loose px-4 opacity-100 font-medium">
+                        SPIDERCARD 專為現代職場打造的智慧電子名片。<br>
+                        只需輕觸手機，瞬間交換聯絡資訊。<br>
+                        環保、高效、展現專業形象的最佳工具。
+                    </p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col gap-3">
+                    
+                    <button onclick="shareResult()" class="w-full btn-gold text-[#5c1815] py-4 rounded-lg font-bold text-base shadow-lg tracking-widest flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-share-nodes"></i> 分享好運
+                    </button>
+
+                    <button id="dl-btn" onclick="downloadImage()" class="w-full bg-white text-[#E44C46] py-4 rounded-lg font-bold text-base shadow-lg tracking-widest border border-white/50">
+                        <i class="fa-solid fa-download mr-2"></i> 下載圖片
+                    </button>
+
+                    <button onclick="location.reload()" class="w-full btn-secondary py-4 rounded-lg font-bold text-base mt-2 tracking-widest">
+                        <i class="fa-solid fa-rotate-right mr-2"></i> 重新測驗
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 translate-y-[150%] transition-transform duration-300 z-[100] pointer-events-none">
+        <div class="bg-slate-800/90 backdrop-blur text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-3 border border-white/10">
+            <i class="fa-solid fa-circle-check text-[#F8CB2B]"></i>
+            <span class="font-bold tracking-wide">已複製到剪貼簿！</span>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA ---
+        
+        const questions = [
+            {
+                id: 1, tag: "除夕",
+                text: "除夕夜圍爐，大家在聊明年的計畫，這時你會？",
+                img: "[https://i.pinimg.com/736x/d7/73/2b/d7732bfd2bd59cb32cc2baca2eedfa57.jpg](https://i.pinimg.com/736x/d7/73/2b/d7732bfd2bd59cb32cc2baca2eedfa57.jpg)",
+                options: [
+                    { label: "A", text: "主導話題：興奮地分享自己的宏大目標，並給晚輩建議。", value: "Fire" },
+                    { label: "B", text: "冷靜觀察：默默聽大家說，心裡在分析誰說得有道理。", value: "Earth" },
+                    { label: "C", text: "熱絡氣氛：忙著夾菜、說笑話，確保每個人都開心。", value: "Wind" },
+                    { label: "D", text: "放空神遊：雖然人在現場，但腦子裡已經在想等一下要去哪裡玩。", value: "Water" }
+                ]
+            },
+            {
+                id: 2, tag: "財運",
+                text: "拿到一筆意外的年終獎金（或紅包），你的第一直覺是？",
+                img: "[https://i.pinimg.com/736x/d6/26/95/d62695e17dc21c7578551d5d99691cb5.jpg](https://i.pinimg.com/736x/d6/26/95/d62695e17dc21c7578551d5d99691cb5.jpg)",
+                options: [
+                    { label: "A", text: "投資自己：拿去報名高階課程或買一身行頭。", value: "Fire" },
+                    { label: "B", text: "存入帳戶：按照原本的理財規劃分配，安全第一。", value: "Earth" },
+                    { label: "C", text: "請客分享：買禮物給家人朋友，大家開心我就開心。", value: "Wind" },
+                    { label: "D", text: "圓夢基金：終於可以買那個觀望很久的酷東西，或是去旅行。", value: "Water" }
+                ]
+            },
+            {
+                id: 3, tag: "職場",
+                text: "2026 年，你最不想遇到的「職場鬼故事」是？",
+                img: "[https://i.pinimg.com/736x/0a/3f/76/0a3f76711d366f89e8cf06d9938b0b03.jpg](https://i.pinimg.com/736x/0a/3f/76/0a3f76711d366f89e8cf06d9938b0b03.jpg)",
+                options: [
+                    { label: "A", text: "權力被架空：明明我有能力，卻不讓我做決定。", value: "Fire" },
+                    { label: "B", text: "流程混亂：SOP 改來改去，一直在做白工。", value: "Earth" },
+                    { label: "C", text: "氣氛火爆：同事之間勾心鬥角、吵架冷戰。", value: "Wind" },
+                    { label: "D", text: "創意枯竭：每天做重複無聊的瑣事，沒有發揮空間。", value: "Water" }
+                ]
+            },
+            {
+                id: 4, tag: "角色",
+                text: "朋友約你去玩「密室逃脫」，你通常擔任什麼角色？",
+                img: "[https://i.pinimg.com/736x/fc/7a/a4/fc7aa40e8e5a3ea648eefba99f9b2f1f.jpg](https://i.pinimg.com/736x/fc/7a/a4/fc7aa40e8e5a3ea648eefba99f9b2f1f.jpg)",
+                options: [
+                    { label: "A", text: "隊長：負責分配任務，帶領大家衝出去。", value: "Fire" },
+                    { label: "B", text: "解謎擔當：對著複雜的密碼鎖沈思，邏輯推理。", value: "Earth" },
+                    { label: "C", text: "氣氛後援：幫忙找找道具，或是被嚇到時負責尖叫。", value: "Wind" },
+                    { label: "D", text: "腦洞王：發現隱藏機關，用非典型思考破解。", value: "Water" }
+                ]
+            },
+            {
+                id: 5, tag: "劇本",
+                text: "2026 年如果是電影的一年，你希望你的劇本主題是？",
+                img: "[https://i.pinimg.com/736x/97/71/fa/9771fa1f0bc5fb21bf89099ba2bdb422.jpg](https://i.pinimg.com/736x/97/71/fa/9771fa1f0bc5fb21bf89099ba2bdb422.jpg)",
+                options: [
+                    { label: "A", text: "《華爾街之狼》：商戰、競爭、成為最後的贏家。", value: "Fire" },
+                    { label: "B", text: "《福爾摩斯》：精密、推理、一切盡在掌握之中。", value: "Earth" },
+                    { label: "C", text: "《六人行》：溫馨、友情、充滿歡笑與愛的日常。", value: "Wind" },
+                    { label: "D", text: "《星際效應》：探索、未知、穿越時空的壯闊旅程。", value: "Water" }
+                ]
+            },
+            {
+                id: 6, tag: "回血",
+                text: "當工作壓力大到爆炸時，什麼方式最能讓你回血？",
+                img: "[https://i.pinimg.com/736x/7a/3b/5d/7a3b5df165040c14a9fd094e1a816061.jpg](https://i.pinimg.com/736x/7a/3b/5d/7a3b5df165040c14a9fd094e1a816061.jpg)",
+                options: [
+                    { label: "A", text: "運動宣洩：去健身房爆汗、打拳擊。", value: "Fire" },
+                    { label: "B", text: "獨處整理：整理房間、列清單，環境乾淨了心就靜了。", value: "Earth" },
+                    { label: "C", text: "聚會訴苦：找好朋友喝一杯，把苦水吐出來。", value: "Wind" },
+                    { label: "D", text: "抽離放鬆：看電影、聽音樂，暫時逃離現實。", value: "Water" }
+                ]
+            },
+            {
+                id: 7, tag: "直覺",
+                text: "眼前有四扇門，直覺告訴你，哪一扇門後藏著寶藏？",
+                img: "[https://i.pinimg.com/736x/74/3b/95/743b955ed3fc77e3f4e8d1de44665f26.jpg](https://i.pinimg.com/736x/74/3b/95/743b955ed3fc77e3f4e8d1de44665f26.jpg)",
+                options: [
+                    { label: "A", text: "金屬大門：厚重、雕刻著獅子圖騰，感覺金碧輝煌。", value: "Fire" },
+                    { label: "B", text: "幾何拱門：線條極簡、帶有密碼鎖，藏著高科技機密。", value: "Earth" },
+                    { label: "C", text: "木製花門：掛滿藤蔓與鮮花，感覺溫暖舒適。", value: "Wind" },
+                    { label: "D", text: "星光虛掩門：半透明發著幽光，充滿神秘吸引力。", value: "Water" }
+                ]
+            },
+            {
+                id: 8, tag: "開運",
+                text: "如果要選一個幸運符隨身攜帶，你會選？",
+                img: "[https://i.pinimg.com/736x/94/bb/b8/94bbb8f94029f91fb49020c4aca2bf71.jpg](https://i.pinimg.com/736x/94/bb/b8/94bbb8f94029f91fb49020c4aca2bf71.jpg)",
+                options: [
+                    { label: "A", text: "黃金/黑曜石：象徵財富與避邪的強大能量。", value: "A" },
+                    { label: "B", text: "白金/銀飾：象徵純粹與理性的冷靜能量。", value: "B" },
+                    { label: "C", text: "粉晶/琥珀：象徵人緣與親和的溫柔能量。", value: "C" },
+                    { label: "D", text: "青金石/隕石：象徵靈性與直覺的宇宙能量。", value: "D" }
+                ]
+            }
+        ];
+
+        // Results Data - NEUTRAL TONE
+        const results = {
+            "Domination": {
+                title: "霸業",
+                desc: "2026 是展現領導魅力的時刻。穩健的氣場與果斷的決策，將是你職場進階的關鍵。這一年適合帶領團隊面對挑戰，你的自信與擔當，將為眾人指引方向，成就非凡的事業里程碑。",
+                productName: "躍馬迎春（金）",
+                productCopy: "奔騰的駿馬與黑金配色，象徵無可阻擋的權力與勝利。這是王者的印記，助你在商場上開疆闢土。",
+                img: "[https://i.pinimg.com/736x/77/91/15/7791151f90f1c87361d947d827226a7e.jpg](https://i.pinimg.com/736x/77/91/15/7791151f90f1c87361d947d827226a7e.jpg)", 
+                link: "[https://www.pinkoi.com/product/dVzXsRZz](https://www.pinkoi.com/product/dVzXsRZz)"
+            },
+            "Velocity": {
+                title: "極速",
+                desc: "效率與執行力是 2026 的關鍵詞。面對快速變化的環境，保持靈活的身段與敏銳的直覺，能讓你搶得先機。這一年適合果斷行動、快速驗證，用速度為自己創造更多可能。",
+                productName: "碳纖黑",
+                productCopy: "碳纖維代表輕量與極速。這張充滿科技感的名片，專為講求效率、走在時代尖端的你所打造。",
+                img: "[https://i.pinimg.com/1200x/60/3f/9e/603f9e6273ea950eeb16d567936e99f0.jpg](https://i.pinimg.com/1200x/60/3f/9e/603f9e6273ea950eeb16d567936e99f0.jpg)",
+                link: "[https://www.pinkoi.com/product/3utZUn6Z](https://www.pinkoi.com/product/3utZUn6Z)"
+            },
+            "Refinement": {
+                title: "精煉",
+                desc: "2026 年重在「質」的提升。專注於細節的打磨與專業深度的積累，將為你贏得長遠的信賴。不隨波逐流，堅持高品質的產出，你的專業價值將在沈澱後更加耀眼。",
+                productName: "星空灰",
+                productCopy: "介於黑白之間的高級灰，象徵你對質感細節的極致追求。這是一張經得起放大檢視的名片。",
+                img: "[https://i.pinimg.com/736x/3e/ef/2e/3eef2e916f3921ce1a7fbfe929e42b6e.jpg](https://i.pinimg.com/736x/3e/ef/2e/3eef2e916f3921ce1a7fbfe929e42b6e.jpg)",
+                link: "[https://www.pinkoi.com/product/FdTjyvBf](https://www.pinkoi.com/product/FdTjyvBf)"
+            },
+            "Strategy": {
+                title: "佈局",
+                desc: "2026 是適合長遠規劃的一年。透過縝密的思考與策略佈局，能在複雜的局勢中看清方向。比起一時的喧嘩，沈穩的籌備與佈局將為未來奠定堅實的基礎，靜待時機成熟。",
+                productName: "月光黑",
+                productCopy: "不需要多餘的裝飾，深沉的黑代表你的深不可測。這張卡低調卻擁有強大的內核，如同你的實力。",
+                img: "[https://i.pinimg.com/736x/e9/dc/20/e9dc20a0627418390ff15574c32e2a46.jpg](https://i.pinimg.com/736x/e9/dc/20/e9dc20a0627418390ff15574c32e2a46.jpg)",
+                link: "[https://www.pinkoi.com/product/AuG5MRHX](https://www.pinkoi.com/product/AuG5MRHX)"
+            },
+            "Popularity": {
+                title: "人氣",
+                desc: "人際連結將在 2026 年扮演重要角色。真誠的交流與互助合作，能為你帶來意想不到的資源與機會。發揮你的親和力，建立良好的合作關係，人脈將成為你事業上最溫暖的助力。",
+                productName: "汪星 X 喵語 - 雙卡組（藍白配）",
+                productCopy: "明亮輕快的配色，正如你陽光的個性。這是一張「自帶話題」的名片，拿出它，就是開啟一段新友誼的開始。",
+                img: "[https://i.pinimg.com/474x/b4/5f/60/b45f6097876db55142c8f1dcc913c16b.jpg](https://i.pinimg.com/474x/b4/5f/60/b45f6097876db55142c8f1dcc913c16b.jpg)",
+                link: "[https://www.pinkoi.com/product/JcJEfUdH](https://www.pinkoi.com/product/JcJEfUdH)"
+            },
+            "Harmony": {
+                title: "圓融",
+                desc: "平衡與協調是 2026 的智慧。在多變的環境中，你的包容力與同理心是團隊最強大的黏著劑。透過傾聽與溝通化解歧見，營造和諧的氛圍，將能匯聚眾人的力量，穩步前行。",
+                productName: "汪星 X 喵語 - 雙卡組（黑白配）",
+                productCopy: "貓狗依偎的背影，傳遞出「我願意傾聽」的友善訊號。它能瞬間融化陌生感，展現你內心柔軟的一面。",
+                img: "[https://i.pinimg.com/1200x/03/8f/83/038f83319f4564b64c86cf71db8335c6.jpg](https://i.pinimg.com/1200x/03/8f/83/038f83319f4564b64c86cf71db8335c6.jpg)",
+                link: "[https://www.pinkoi.com/product/JcJEfUdH](https://www.pinkoi.com/product/JcJEfUdH)"
+            },
+            "Wisdom": {
+                title: "洞見",
+                desc: "2026 年是充實內在、洞察趨勢的時刻。保持對新知的好奇心，深入探索未知的領域。你獨特的觀點與洞察力，將幫助你在迷霧中找到清晰的路徑，成為眾人信賴的智囊。",
+                productName: "躍馬迎春（墨）",
+                productCopy: "墨色代表著沈穩與智慧，結合奔騰的駿馬，象徵著在深思熟慮後，精準地抓住機會，一躍而起。",
+                img: "[https://i.pinimg.com/736x/25/31/c7/2531c7efe0945c17e49dc8f9e631d72b.jpg](https://i.pinimg.com/736x/25/31/c7/2531c7efe0945c17e49dc8f9e631d72b.jpg)",
+                link: "[https://www.pinkoi.com/product/dVzXsRZz](https://www.pinkoi.com/product/dVzXsRZz)"
+            },
+            "Breakthrough": {
+                title: "突破",
+                desc: "2026 象徵著創新與可能。試著跳脫既有的框架，用全新的視角看待問題。這一年適合跨界嘗試、激發創意，你的獨特思維將打破常規，為自己開創出一片全新的天地。",
+                productName: "星河夜曲雙卡組",
+                productCopy: "浩瀚星空與52赫茲的鯨魚，象徵著無限的可能與自由的靈魂。這組套卡獻給勇於突破、不被定義的你。",
+                img: "[https://i.pinimg.com/736x/59/a6/10/59a610ce4f2021fa2ac18d8beb0af283.jpg](https://i.pinimg.com/736x/59/a6/10/59a610ce4f2021fa2ac18d8beb0af283.jpg)",
+                link: "[https://www.pinkoi.com/product/6Ecxn8cZ](https://www.pinkoi.com/product/6Ecxn8cZ)"
+            }
+        };
+
+        // --- APP STATE ---
+        let currentStep = 0;
+        let userAnswers = new Array(8).fill(null);
+
+        // --- FUNCTIONS ---
+
+        function startQuiz() {
+            document.getElementById('landing-page').classList.add('hidden');
+            document.getElementById('quiz-page').classList.remove('hidden');
+            document.getElementById('quiz-page').classList.add('flex');
+            currentStep = 1;
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            if (currentStep < 1) currentStep = 1;
+            const q = questions[currentStep - 1];
+            
+            // Header Back Button Logic
+            const backBtn = document.getElementById('back-btn');
+            if (currentStep > 1) {
+                backBtn.style.opacity = '1';
+                backBtn.style.pointerEvents = 'auto';
+            } else {
+                backBtn.style.opacity = '0';
+                backBtn.style.pointerEvents = 'none';
+            }
+
+            // Update Progress text
+            document.getElementById('q-number').innerText = currentStep;
+            
+            // Update Question Text
+            document.getElementById('q-text').innerText = q.text;
+            
+            // Image (Fade effect)
+            const imgEl = document.getElementById('q-img');
+            imgEl.style.opacity = 0;
+            setTimeout(() => {
+                imgEl.src = q.img;
+                imgEl.style.opacity = 0.9;
+            }, 200);
+
+            // Hide Next Button initially
+            const actionBar = document.getElementById('action-bar');
+            actionBar.classList.add('hidden');
+            document.getElementById('next-btn').classList.add('hidden');
+
+            // Scroll to top
+            const content = document.getElementById('quiz-content');
+            if(content) content.scrollTop = 0;
+
+            // Options
+            q.options.forEach((opt, idx) => {
+                const char = ['A', 'B', 'C', 'D'][idx];
+                const btn = document.getElementById(`opt-${char.toLowerCase()}`);
+                const textSpan = document.getElementById(`opt-${char.toLowerCase()}-text`);
+                
+                // Reset Styles
+                btn.classList.remove('selected');
+                textSpan.innerText = opt.text;
+                
+                // Check if previously selected (for back navigation)
+                if (userAnswers[currentStep-1] === opt.label) {
+                    btn.classList.add('selected');
+                    actionBar.classList.remove('hidden');
+                    document.getElementById('next-btn').classList.remove('hidden'); // Show if previously answered
+                }
+            });
+
+            // Finish button visibility
+            const finishBtn = document.getElementById('finish-btn');
+            if (currentStep < 8) {
+                finishBtn.classList.add('hidden');
+            } else {
+                // For last step, hide next button, finish button visibility depends on selection
+                document.getElementById('next-btn').classList.add('hidden'); // Ensure next is hidden
+                if (userAnswers[currentStep-1]) {
+                    finishBtn.classList.remove('hidden');
+                } else {
+                    finishBtn.classList.add('hidden');
+                }
+            }
+        }
+
+        function selectOption(char) {
+            userAnswers[currentStep - 1] = char;
+            
+            // Update UI
+            ['a','b','c','d'].forEach(c => document.getElementById(`opt-${c}`).classList.remove('selected'));
+            document.getElementById(`opt-${char.toLowerCase()}`).classList.add('selected');
+            
+            // Show Button Logic
+            const actionBar = document.getElementById('action-bar');
+            actionBar.classList.remove('hidden');
+            
+            if (currentStep < 8) {
+                document.getElementById('next-btn').classList.remove('hidden');
+            } else {
+                document.getElementById('finish-btn').classList.remove('hidden');
+            }
+        }
+
+        function prevQuestion() {
+            if (currentStep > 1) {
+                currentStep--;
+                renderQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentStep < 8) {
+                currentStep++;
+                renderQuestion();
+            }
+        }
+
+        function showResult() {
+            // Logic Calculation
+            let scores = { Fire: 0, Earth: 0, Wind: 0, Water: 0 };
+            
+            for(let i=0; i<7; i++) {
+                const ans = userAnswers[i];
+                const q = questions[i];
+                const selectedOpt = q.options.find(o => o.label === ans);
+                scores[selectedOpt.value]++;
+            }
+
+            let maxScore = -1;
+            let dominant = 'Fire';
+            for (const [key, value] of Object.entries(scores)) {
+                if (value > maxScore) {
+                    maxScore = value;
+                    dominant = key;
+                }
+            }
+
+            const q8Ans = userAnswers[7];
+            let resultKey = "";
+
+            if (dominant === 'Fire') {
+                if (q8Ans === 'A' || q8Ans === 'B') resultKey = "Domination";
+                else resultKey = "Velocity";
+            } else if (dominant === 'Earth') {
+                if (q8Ans === 'A' || q8Ans === 'B') resultKey = "Refinement";
+                else resultKey = "Strategy";
+            } else if (dominant === 'Wind') {
+                if (q8Ans === 'C') resultKey = "Popularity";
+                else resultKey = "Harmony";
+            } else { // Water
+                if (q8Ans === 'D') resultKey = "Wisdom";
+                else resultKey = "Breakthrough";
+            }
+
+            const res = results[resultKey];
+
+            // Render Result
+            document.getElementById('quiz-page').classList.add('hidden');
+            document.getElementById('result-page').classList.remove('hidden');
+            document.getElementById('result-page').classList.add('flex');
+
+            document.getElementById('result-title').innerText = res.title;
+            document.getElementById('result-desc').innerText = res.desc;
+            
+            const imgEl = document.getElementById('product-img');
+            // FIX: Remove crossOrigin to allow image to display (but might break html2canvas capture)
+            imgEl.removeAttribute('crossOrigin'); 
+            imgEl.src = res.img;
+            
+            document.getElementById('product-name').innerText = res.productName;
+            document.getElementById('product-copy').innerText = res.productCopy;
+            document.getElementById('product-link').href = res.link;
+        }
+        
+        // --- NEW: Download Image Function using html2canvas ---
+        function downloadImage() {
+            const btn = document.getElementById('dl-btn');
+            const originalHTML = btn.innerHTML;
+            
+            // 1. UI Feedback
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> 圖片生成中...';
+            btn.disabled = true;
+            btn.classList.add('opacity-70', 'cursor-not-allowed');
+
+            const resultPage = document.getElementById('result-page');
+            
+            // 2. Execute html2canvas
+            html2canvas(resultPage, {
+                useCORS: true, 
+                allowTaint: true, // Allow tainted canvas, but toBlob might fail
+                scale: 2, 
+                backgroundColor: '#E44C46', 
+                logging: false,
+                onclone: (clonedDoc) => {
+                    const clonedPage = clonedDoc.getElementById('result-page');
+                    
+                    clonedPage.style.height = 'auto';
+                    clonedPage.style.overflow = 'visible';
+                    clonedPage.scrollTop = 0; 
+                    
+                    const buttons = clonedPage.querySelectorAll('button');
+                    buttons.forEach(b => b.style.display = 'none');
+                }
+            }).then(canvas => {
+                // 3. Convert to Blob and Download
+                try {
+                    canvas.toBlob(function(blob) {
+                        if (!blob) {
+                            alert('圖片生成失敗 (可能受限於 Pinterest 圖片保護)，請嘗試直接使用手機截圖功能。');
+                            resetBtn();
+                            return;
+                        }
+                        
+                        const url = URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.download = `spidercard_fortune_2026_${new Date().getTime()}.png`;
+                        link.href = url;
+                        document.body.appendChild(link);
+                        link.click();
+                        
+                        document.body.removeChild(link);
+                        setTimeout(() => URL.revokeObjectURL(url), 100);
+                        
+                        showToastMsg('圖片下載成功！');
+                        resetBtn();
+                    }, 'image/png');
+                } catch (e) {
+                    console.error("Canvas Security Error:", e);
+                    alert('由於圖片版權保護，無法自動生成圖片，請您直接使用手機截圖保存結果！');
+                    resetBtn();
+                }
+            }).catch(err => {
+                console.error("Screenshot failed:", err);
+                alert('圖片生成失敗，可能是圖片來源限制，請嘗試直接使用手機截圖功能。');
+                resetBtn();
+            });
+
+            function resetBtn() {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+                btn.classList.remove('opacity-70', 'cursor-not-allowed');
+            }
+        }
+
+        // --- Shared Toast Logic ---
+        function showToastMsg(msg) {
+            const toast = document.getElementById('toast');
+            toast.querySelector('span').innerText = msg;
+            toast.classList.remove('translate-y-[150%]');
+            setTimeout(() => {
+                toast.classList.add('translate-y-[150%]');
+            }, 3000);
+        }
+
+        function shareResult() {
+            const textToShare = `我的2026開運關鍵字是：${document.getElementById('result-title').innerText}！ 快來測測你的：[連結]`;
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(textToShare)
+                    .then(() => showToastMsg('已複製分享文字！'))
+                    .catch(() => fallbackCopyTextToClipboard(textToShare));
+            } else {
+                fallbackCopyTextToClipboard(textToShare);
+            }
+        }
+
+        function fallbackCopyTextToClipboard(text) {
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                var successful = document.execCommand('copy');
+                if (successful) showToastMsg('已複製分享文字！');
+            } catch (err) {
+                console.error('Copy failed', err);
+            }
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+</html>
