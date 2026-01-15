@@ -242,6 +242,59 @@
         </div>
     </div>
 
+    <!-- Hidden Export Template (9:16 Aspect Ratio) -->
+    <div id="export-template" class="fixed top-0 left-[-9999px] w-[1080px] h-[1920px] bg-[#b93c37] flex flex-col items-center pt-24 pb-20 px-16 text-center font-serif text-white overflow-hidden" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23F8CB2B\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');">
+        
+        <!-- Header -->
+        <p class="text-[#F8CB2B] text-4xl font-bold tracking-widest mb-2 font-sans">你的</p>
+        <p class="text-[#F8CB2B] text-5xl font-bold tracking-widest mb-16 font-sans">2026年關鍵字是</p>
+
+        <!-- Main Card (Fortune Stick) -->
+        <div class="w-64 bg-[#fffbeb] rounded-2xl shadow-[0_0_40px_rgba(0,0,0,0.3)] flex flex-col items-center justify-center py-12 relative border-4 border-[#F8CB2B] mb-12">
+            <div class="absolute top-0 w-full h-6 bg-[#E44C46]"></div>
+            <div class="writing-vertical text-8xl font-serif font-black text-[#2c2c2c] tracking-[0.2em] leading-none border-x-4 border-[#2c2c2c] py-8 px-6" id="export-keyword">
+                關鍵字
+            </div>
+        </div>
+
+        <!-- Description -->
+        <p id="export-desc" class="text-4xl leading-relaxed font-medium text-justify px-8 mb-16 tracking-wide drop-shadow-sm">
+            這裡會填入解析文字...
+        </p>
+
+        <!-- Divider -->
+        <div class="flex items-center gap-6 w-full justify-center mb-12 opacity-80">
+            <div class="h-px bg-[#F8CB2B] w-24"></div>
+            <span class="text-[#F8CB2B] text-3xl tracking-widest font-sans font-bold">推薦開運小物</span>
+            <div class="h-px bg-[#F8CB2B] w-24"></div>
+        </div>
+
+        <!-- Product Card -->
+        <div class="w-full bg-[#8B2D29] rounded-[40px] p-10 flex gap-8 items-center border border-[#F8CB2B]/30 shadow-2xl relative overflow-hidden mb-auto">
+            <!-- Decorative Circle -->
+            <div class="absolute -right-20 -top-20 w-64 h-64 bg-[#F8CB2B]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="flex-1 text-left">
+                <h3 id="export-product-name" class="text-5xl font-bold text-white mb-6 font-sans">產品名稱</h3>
+                <p id="export-product-copy" class="text-3xl text-[#ffdada] font-light leading-relaxed">
+                    產品文案...
+                </p>
+            </div>
+            <div class="w-64 h-64 bg-white p-2 rounded-3xl shrink-0 shadow-lg rotate-3">
+                <img id="export-product-img" src="" class="w-full h-full object-cover rounded-2xl" crossorigin="anonymous">
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-16 flex flex-col items-center gap-4">
+            <div class="flex items-center gap-4 text-[#F8CB2B]">
+                <i class="fa-solid fa-layer-group text-5xl"></i>
+                <span class="text-5xl font-bold tracking-widest font-sans">SPIDERCARD</span>
+            </div>
+            <p class="text-white/80 text-2xl tracking-[0.5em] font-light font-sans mt-2">專屬於你的電子名片</p>
+        </div>
+    </div>
+
     <!-- App Logic -->
     <script src="src/js/app.js" type="module"></script>
 </body>

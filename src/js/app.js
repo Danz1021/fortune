@@ -1,9 +1,10 @@
 import { questions, results } from './data.js';
-import { copyToClipboard, downloadImage } from './utils.js';
+import { copyToClipboard, downloadImage, shareImage } from './utils.js';
 
 // --- APP STATE ---
 let currentStep = 0;
 let userAnswers = new Array(8).fill(null);
+let currentResultData = null; // Store result for export
 
 // --- CORE LOGIC ---
 
@@ -156,6 +157,7 @@ function showResult() {
     }
 
     const res = results[resultKey];
+    currentResultData = res; // Save for export
 
     // Render Result
     document.getElementById('quiz-page').classList.add('hidden');
@@ -174,19 +176,29 @@ function showResult() {
     document.getElementById('product-link').href = res.link;
 }
 
-function shareResult() {
-    const title = document.getElementById('result-title').innerText;
-    const textToShare = `我的2026開運關鍵字是：${title}！ 快來測測你的：[連結]`;
-    copyToClipboard(textToShare);
-}
-
 // --- EXPOSE TO WINDOW ---
-// 為了讓 HTML 中的 onclick="..." 能夠呼叫到這些函數，我們必須將它們掛載到 window 物件上。
 window.startQuiz = startQuiz;
 window.selectOption = selectOption;
 window.prevQuestion = prevQuestion;
 window.nextQuestion = nextQuestion;
 window.showResult = showResult;
-window.shareResult = shareResult;
-window.downloadImage = () => downloadImage('result-page', 'dl-btn');
+
+// Share Button: 分享圖片
+window.shareResult = function() {
+    if(currentResultData) {
+        // Pass button ID for loading state
+        // Assuming the button calling this has no specific ID or we use 'share-btn' logic inside
+        // But better to pass element if possible. For simplicity here, we assume it's triggered by the share button.
+        // Let's modify HTML to give share button an ID to be safer.
+        shareImage(currentResultData, null); 
+    }
+};
+
+// Download Button
+window.downloadImage = function() {
+    if(currentResultData) {
+        downloadImage(currentResultData, 'dl-btn');
+    }
+};
+
 window.locationReload = () => location.reload();
