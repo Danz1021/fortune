@@ -59,19 +59,43 @@ async function generateExportImage(data) {
         else imgEl.onload = resolve;
     });
 
-    // 2. Generate Canvas
-    // @ts-ignore
-    if (typeof html2canvas === 'undefined') return null;
+    // 2. Prepare for Capture (Make visible but keep behind)
+    const originalVisibility = template.style.visibility;
+    template.style.visibility = 'visible'; // Must be visible to be rendered
 
+    // 3. Generate Canvas
     // @ts-ignore
-    const canvas = await html2canvas(template, {
-        useCORS: true,
-        scale: 1, // Already high res (1080px width)
-        backgroundColor: '#b93c37',
-        logging: false
-    });
+    if (typeof html2canvas === 'undefined') {
+        template.style.visibility = originalVisibility;
+        return null;
+    }
 
-    return new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+    try {
+        // @ts-ignore
+        const canvas = await html2canvas(template, {
+            useCORS: true,
+            allowTaint: true,
+            scale: 1, // 1080px width is enough
+            backgroundColor: '#b93c37',
+            logging: false,
+            // Mobile Optimization:
+            width: 1080,
+            height: 1920,
+            windowWidth: 1080,
+            windowHeight: 1920,
+            x: 0,
+            y: 0,
+            scrollX: 0,
+            scrollY: 0
+        });
+        
+        template.style.visibility = originalVisibility; // Restore
+        return new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+    } catch (e) {
+        console.error("html2canvas error:", e);
+        template.style.visibility = originalVisibility; // Restore on error
+        return null;
+    }
 }
 
 // 下載圖片 (使用新的 Template)
@@ -88,7 +112,7 @@ export async function downloadImage(data, btnId) {
 
     try {
         const blob = await generateExportImage(data);
-        if (!blob) throw new Error("Image generation failed");
+        if (!blob) throw new Error("Image generation failed (Blob is null)");
 
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
@@ -102,7 +126,8 @@ export async function downloadImage(data, btnId) {
         showToastMsg('圖片下載成功！');
     } catch (err) {
         console.error("Download Error:", err);
-        alert('圖片生成失敗，請嘗試直接使用手機截圖。');
+        // Show detailed error for debugging if needed, or user friendly msg
+        alert('圖片生成失敗，請檢查網路連線或稍後再試。\n(錯誤代碼: Canvas-Mob)'); 
     } finally {
         btn.innerHTML = originalHTML;
         btn.disabled = false;
