@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <!-- 加入這行以解決 Pinterest 圖片無法顯示的問題 -->
+    <meta name="referrer" content="no-referrer">
+    <title>2026 你的開運關鍵字 - SPIDERCARD</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- html2canvas for Screenshot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body class="bg-stone-900">
+
+    <div class="app-container bg-pattern font-sans">
+        
+        <!-- Header / Nav -->
+        <div class="h-16 flex items-center justify-center sticky top-0 z-50 bg-[#E44C46]/95 backdrop-blur-sm border-b border-white/10 shadow-md shrink-0">
+            <!-- Back Button -->
+            <button id="back-btn" onclick="prevQuestion()" class="absolute left-4 w-10 h-10 flex items-center justify-center text-[#F8CB2B] hover:text-white transition-colors opacity-0 pointer-events-none">
+                <i class="fa-solid fa-chevron-left text-lg"></i>
+            </button>
+            
+            <div class="text-sm tracking-[0.2em] text-[#F8CB2B] font-bold uppercase">SPIDERCARD 2026</div>
+        </div>
+
+        <!-- PAGE 1: Landing Page -->
+        <div id="landing-page" class="flex-1 flex flex-col items-center justify-center p-8 text-center fade-in relative overflow-y-auto scroll-hidden">
+            
+            <!-- Decorative Elements -->
+            <div class="absolute top-10 left-0 w-full flex justify-between px-4 opacity-30 pointer-events-none">
+                <i class="fa-solid fa-cloud text-6xl text-[#F8CB2B]"></i>
+                <i class="fa-solid fa-cloud text-6xl text-[#F8CB2B] transform scale-x-[-1]"></i>
+            </div>
+
+            <!-- Main Visual: Giant Fortune Stick -->
+            <div class="mb-10 mt-12 relative z-10 animate-float">
+                <!-- The Stick Body -->
+                <div class="w-24 h-64 mx-auto bg-[#fffbeb] rounded-lg shadow-[0_0_50px_rgba(248,203,43,0.4)] flex flex-col items-center justify-center py-6 relative border border-[#E44C46]/20 overflow-hidden">
+                    <!-- Paper Texture Overlay -->
+                    <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23000\' fill-rule=\'evenodd\'%3E%3Cpath d=\'M0 40L40 0H20L0 20M40 40V20L20 40\'/%3E%3C/g%3E%3C/svg%3E')]"></div>
+                    <!-- Top Red Mark -->
+                    <div class="absolute top-0 w-full h-4 bg-[#E44C46]"></div>
+                    <!-- Vertical Title -->
+                    <div class="relative z-10 h-full flex flex-col items-center justify-center">
+                        <div class="writing-vertical text-5xl font-serif font-black text-[#2c2c2c] tracking-[0.4em] leading-none border-x-2 border-[#2c2c2c] py-4 px-3">
+                            開運
+                        </div>
+                    </div>
+                    <!-- Bottom Decor -->
+                    <div class="absolute bottom-4 text-[#E44C46] text-sm font-serif font-bold pt-2 border-t border-[#E44C46]/30 w-12 text-center">
+                        上吉
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Title -->
+            <div class="mb-6 relative z-10">
+                <h1 class="text-center drop-shadow-md">
+                    <span class="block text-2xl font-sans font-bold text-white mb-2 tracking-widest">測出你的</span>
+                    <span class="block text-4xl font-sans font-black gold-text-gradient tracking-[0.1em]">2026開運關鍵字</span>
+                </h1>
+            </div>
+            
+            <!-- Description -->
+            <div class="w-full max-w-[280px] border-t border-b border-white/20 py-5 mb-10">
+                <p class="text-white/90 text-sm leading-loose font-sans font-light tracking-wide text-center">
+                    歲次丙午，躍馬之年。<br>
+                    你的靈魂頻率決定今年的開運秘訣。
+                </p>
+            </div>
+
+            <!-- Button -->
+            <button onclick="startQuiz()" class="w-full max-w-xs btn-gold rounded-full py-4 text-lg font-bold tracking-widest flex items-center justify-center gap-2 group shadow-[0_0_25px_rgba(248,203,43,0.3)] shrink-0">
+                <span>開運拿字</span> <i class="fa-solid fa-chevron-right text-xs group-hover:translate-x-1 transition-transform"></i>
+            </button>
+            
+            <!-- Footer Text -->
+            <p class="mt-6 text-xs text-[#F8CB2B]/70 font-sans pb-8">此測驗將為您匹配 SPIDERCARD 開運神物</p>
+        </div>
+
+        <!-- PAGE 2: Quiz Page -->
+        <div id="quiz-page" class="hidden flex-1 flex flex-col fade-in relative h-full overflow-hidden">
+            
+            <!-- Scrollable Content Area -->
+            <div id="quiz-content" class="flex-1 overflow-y-auto scroll-hidden w-full flex flex-col items-center">
+                
+                <!-- Question Visual (Reduced Width using padding) -->
+                <div class="w-full px-12 relative shrink-0">
+                    <img id="q-img" src="" class="w-full h-auto object-cover" alt="Question Image">
+                </div>
+
+                <!-- Text & Options Wrapper with Padding -->
+                <div class="w-full px-6 pt-6 pb-6 flex flex-col items-center">
+                    <!-- Plain Text Progress -->
+                    <div class="text-[#F8CB2B] font-bold tracking-widest text-sm mb-2 font-serif text-center w-full">
+                        問題 <span id="q-number">1</span> / 8
+                    </div>
+
+                    <!-- Question Text -->
+                    <h2 id="q-text" class="text-xl font-bold text-white mb-8 leading-normal font-sans text-center w-full">
+                        題目載入中...
+                    </h2>
+
+                    <!-- Options -->
+                    <div class="space-y-4 w-full">
+                        <button id="opt-a" onclick="selectOption('A')" class="option-card w-full text-left p-5 rounded-xl flex items-start group">
+                            <div class="w-6 h-6 rounded-full border-2 border-[#E44C46] flex items-center justify-center text-xs font-bold mr-3 mt-0.5 shrink-0 bg-red-50 text-[#E44C46]">A</div>
+                            <span id="opt-a-text" class="text-sm font-medium leading-relaxed">選項 A</span>
+                        </button>
+
+                        <button id="opt-b" onclick="selectOption('B')" class="option-card w-full text-left p-5 rounded-xl flex items-start group">
+                            <div class="w-6 h-6 rounded-full border-2 border-[#E44C46] flex items-center justify-center text-xs font-bold mr-3 mt-0.5 shrink-0 bg-red-50 text-[#E44C46]">B</div>
+                            <span id="opt-b-text" class="text-sm font-medium leading-relaxed">選項 B</span>
+                        </button>
+
+                        <button id="opt-c" onclick="selectOption('C')" class="option-card w-full text-left p-5 rounded-xl flex items-start group">
+                            <div class="w-6 h-6 rounded-full border-2 border-[#E44C46] flex items-center justify-center text-xs font-bold mr-3 mt-0.5 shrink-0 bg-red-50 text-[#E44C46]">C</div>
+                            <span id="opt-c-text" class="text-sm font-medium leading-relaxed">選項 C</span>
+                        </button>
+
+                        <button id="opt-d" onclick="selectOption('D')" class="option-card w-full text-left p-5 rounded-xl flex items-start group">
+                            <div class="w-6 h-6 rounded-full border-2 border-[#E44C46] flex items-center justify-center text-xs font-bold mr-3 mt-0.5 shrink-0 bg-red-50 text-[#E44C46]">D</div>
+                            <span id="opt-d-text" class="text-sm font-medium leading-relaxed">選項 D</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Spacer for bottom button -->
+                <div class="w-full h-32 shrink-0"></div>
+            </div>
+
+            <!-- Bottom Action - Static Block -->
+            <div id="action-bar" class="w-full p-6 pb-8 bg-gradient-to-t from-[#2a0a08] via-[#2a0a08] to-transparent shrink-0 z-50 absolute bottom-0 left-0 hidden">
+                <button id="next-btn" onclick="nextQuestion()" class="hidden w-full btn-gold rounded-xl py-4 font-bold text-lg shadow-lg flex items-center justify-center gap-2">
+                    <span>繼續前進</span> <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                <button id="finish-btn" onclick="showResult()" class="hidden w-full btn-gold rounded-xl py-4 font-bold text-lg shadow-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-lock-open"></i> <span>解鎖關鍵字</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- PAGE 3: Result Page -->
+        <div id="result-page" class="hidden flex-1 flex flex-col overflow-y-auto scroll-hidden relative bg-[#E44C46]">
+            <!-- Result Header -->
+            <div class="flex-shrink-0 pt-12 pb-4 flex flex-col items-center relative z-10 animate-float bg-[#E44C46]">
+                
+                <!-- Tag -->
+                <div class="inline-block px-4 py-1.5 rounded-full bg-[#991b1b] text-[#F8CB2B] text-xs font-serif font-bold tracking-widest mb-6 shadow-md border border-[#F8CB2B]">
+                    2026 關鍵字
+                </div>
+
+                <!-- The Result Stick -->
+                <div class="w-24 h-auto py-6 mx-auto bg-[#fffbeb] rounded-lg shadow-[0_0_50px_rgba(248,203,43,0.4)] flex flex-col items-center justify-center relative border border-[#E44C46]/20 overflow-hidden">
+                    <!-- Texture -->
+                    <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23000\' fill-rule=\'evenodd\'%3E%3Cpath d=\'M0 40L40 0H20L0 20M40 40V20L20 40\'/%3E%3C/g%3E%3C/svg%3E')]"></div>
+                    
+                    <!-- Top Mark -->
+                    <div class="absolute top-0 w-full h-4 bg-[#E44C46]"></div>
+                    
+                    <!-- Result Title (Injected JS) -->
+                    <div id="result-title" class="relative z-10 writing-vertical text-5xl font-serif font-black text-[#2c2c2c] tracking-[0.4em] leading-none border-x-2 border-[#2c2c2c] py-4 px-3 flex items-center justify-center"></div>
+                </div>
+            </div>
+
+            <!-- Fortune Paper Content -->
+            <div class="px-6 pb-20 mt-4 relative z-10">
+                
+                <!-- 籤詩解說 -->
+                <div class="fortune-paper rounded-3xl p-8 mb-8 relative shadow-2xl h-auto">
+                    <!-- Updated Text Here -->
+                    <div class="text-[#E44C46] font-serif font-bold text-lg mb-4 flex items-center border-b-2 border-[#E44C46]/20 pb-2">
+                        <i class="fa-solid fa-scroll mr-2"></i> 關鍵字解籤
+                    </div>
+                    <div id="result-desc" class="text-[#5c1815] text-base leading-loose font-medium text-justify font-serif"></div>
+                </div>
+
+                <!-- Lucky Item / Product -->
+                <div class="bg-[#b93c37] rounded-xl p-6 border border-[#F8CB2B]/30 shadow-xl mb-8">
+                    <h3 class="text-[#F8CB2B] font-sans font-bold text-sm tracking-widest mb-4 text-center uppercase">
+                        推薦您的 2026 開運小物
+                    </h3>
+                    
+                    <div class="bg-white rounded-lg p-1 mb-4 shadow-lg rotate-1 transform hover:rotate-0 transition-transform duration-500">
+                        <!-- 加入 referrerpolicy 屬性，移除 crossOrigin 以確保顯示 -->
+                        <img id="product-img" src="" class="w-full aspect-square object-cover rounded" referrerpolicy="no-referrer">
+                    </div>
+
+                    <h4 id="product-name" class="text-xl text-white font-bold text-center mb-2"></h4>
+                    
+                    <p id="product-copy" class="text-red-100 text-base text-center mb-6 font-light leading-relaxed"></p>
+
+                    <!-- Buy Button -->
+                    <a id="product-link" href="#" target="_blank" class="block w-full bg-white text-[#E44C46] rounded-lg py-5 text-2xl text-center font-bold shadow-lg hover:bg-gray-100 transition-all tracking-normal border border-white/50">
+                        立即擁有開運小物
+                    </a>
+                </div>
+
+                <!-- SPIDERCARD Intro -->
+                <div class="text-center mb-12 border-t border-white/30 pt-10">
+                    <p class="text-xl text-[#F8CB2B] uppercase tracking-widest mb-4 font-bold">About SPIDERCARD</p>
+                    <p class="text-white text-sm leading-loose px-4 opacity-100 font-medium">
+                        SPIDERCARD 專為現代職場打造的智慧電子名片。<br>
+                        只需輕觸手機，瞬間交換聯絡資訊。<br>
+                        環保、高效、展現專業形象的最佳工具。
+                    </p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col gap-3">
+                    
+                    <button onclick="shareResult()" class="w-full btn-gold text-[#5c1815] py-4 rounded-lg font-bold text-base shadow-lg tracking-widest flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-share-nodes"></i> 分享好運
+                    </button>
+
+                    <button id="dl-btn" onclick="downloadImage()" class="w-full bg-white text-[#E44C46] py-4 rounded-lg font-bold text-base shadow-lg tracking-widest border border-white/50">
+                        <i class="fa-solid fa-download mr-2"></i> 下載圖片
+                    </button>
+
+                    <button onclick="locationReload()" class="w-full btn-secondary py-4 rounded-lg font-bold text-base mt-2 tracking-widest">
+                        <i class="fa-solid fa-rotate-right mr-2"></i> 重新測驗
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 translate-y-[150%] transition-transform duration-300 z-[100] pointer-events-none">
+        <div class="bg-slate-800/90 backdrop-blur text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-3 border border-white/10">
+            <i class="fa-solid fa-circle-check text-[#F8CB2B]"></i>
+            <span class="font-bold tracking-wide">已複製到剪貼簿！</span>
+        </div>
+    </div>
+
+    <!-- App Logic -->
+    <script src="src/js/app.js" type="module"></script>
+</body>
+</html>

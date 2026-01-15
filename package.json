@@ -1,0 +1,19 @@
+{
+  "name": "spidercard-fortune-2026",
+  "version": "1.0.0",
+  "description": "2026 你的開運關鍵字 - 互動式心理測驗 Web App",
+  "main": "src/js/app.js",
+  "scripts": {
+    "start": "npx http-server . -c-1",
+    "dev": "npx http-server . -c-1"
+  },
+  "keywords": [
+    "spidercard",
+    "quiz",
+    "fortune",
+    "2026"
+  ],
+  "author": "SPIDERCARD Team",
+  "license": "UNLICENSED",
+  "private": true
+}
